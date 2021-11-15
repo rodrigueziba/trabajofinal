@@ -20,7 +20,7 @@ router.get("/search", productsController.search);
 
 /*** CREATE ONE PRODUCT ***/
 router.get("/create", productsController.create); 
-router.post("/create",  //upload.array("image", 6),
+router.post("/new",  //upload.array("image", 6),
   //validationsCreate,
   productsController.store
 );
