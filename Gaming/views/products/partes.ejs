@@ -1,0 +1,76 @@
+<p>
+    <legend>Elige al menos un tag*</legend>
+    <% if (locals.errors && errors.tag) { %>
+      <label class="infovalidacion">
+        <%= errors.tag.msg %>
+      </label>
+    <% } %>
+    <div class="checkbox-container">
+    <% for (let i=0; i<tags.length; i++) { %>
+      <div class="checkbox-row">
+        <input class="checkedOne" type="checkbox" id="<%= tags[i].name %>" name="tag" value="<%= tags[i].id %>" 
+        <label for="<%= tags[i].name %>"><%= tags[i].name %></label>
+      </div>
+    <% } %>
+    </div>
+  </p>
+
+
+  //
+
+
+  
+  <p>
+    <label for="description">Descripción*</label>
+    <textarea name="description" id="description" placeholder="" class="" value=""></textarea>
+  </p>
+
+  <p>
+    <label for="image">Ingrese una o más imágenes*</label>
+    <input type="file" name="image" id="image" multiple accept="image/*" class="" required/>
+  </p>
+
+  <p>
+    <label for="category">Categoría*</label>
+    <select
+      name="category"
+      id="category"
+      required
+    >
+
+      <option value="" disabled selected>Seleccionar Categoría</option>
+
+      <!-- traemos data de la DB y accedemos al nombre -->
+      <% for (let oneCategory of categories) { %>
+        <option value="<%= oneCategory.id %>" 
+        <%= locals.oldData && (oldData.category == oneCategory.id) ? 'selected':"" %>><%= oneCategory.name %></option>
+      <% } %>
+      
+    </select>
+                      </p>
+
+ 
+
+
+  <p>
+    <label for="price">Ingrese precio*</label>
+    <input pattern="[0-9]*" type="number" step="0.01" name="price" id="price"  required 
+    class=""
+    value="" 
+    />
+   
+  </p>
+
+  <p>
+    <label for="discount">Ingrese descuento</label>
+    <input type="number" step="0.01" name="discount" id="discount" required class="" 
+    value=""/>
+ 
+  </p>
+
+  
+
+  <p>
+    <label for="stock">Cantidad*</label>
+    <input pattern="[0-9]*" type="number"  name="stock" id="stock"  required            class=""
+    value=""  />

@@ -38,10 +38,43 @@ const productsController = {
   search:(req, res ) => {},
 
   create:(req, res ) => {
-      
+      db.Category.findAll(      
+            
+      )
+      .then(function(categories){
+        res.render('products/createProduct', {categories:categories})
+      }
+
+      );
+
   },
 
-  store:(req, res ) => {},
+  store: function(req, res) {
+      db.Product.create({
+         name: 'dioses', 
+          //name: req.body.name,
+          description: 'dioses',
+          image: 'dioses',
+          category: 1,
+          price: 2,
+          discount: 2,
+          stock: 2, 
+          
+          
+         // description: req.body.description,
+          //image: req.body.image,
+          //category: req.body.category,
+          //price: req.body.price,
+          //discount: req.body.discount,
+          //stock: req.body.stock, 
+          
+      }).catch((e) => {
+        console.log(e);
+      });
+      let data ='a';
+      return res.send(data);
+      //res.redirect("/products");
+  },
 
   detail:(req, res ) => {},
 
