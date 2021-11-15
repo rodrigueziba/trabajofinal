@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <%-  include ('../partials/head') %>
+  
+
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+        <link rel="stylesheet" href="../css/styles.css">
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script> 
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> 
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script> 
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> 
+        
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    </head>
+    <body>
+         <header> <%-  include ('../partials/header') %> </header>
+         
+    <main class="main-shop">
+      <section class="shop-category">
+        <% if (locals.category) { %>
+          <% if (category.name == "Accessory") { %>
+            <h1>Accesories</h1>
+          <% } else { %>
+            <h1><%= category.name %></h1>
+        <% } %>
+        <% } else if (locals.onsale) { %>
+          <h1><%=onsale%></h1>
+        <% } else if (locals.brand) { %>
+          <h1><%=brand.name%></h1>
+        <% } else { %>
+          <h1>Todos los productos</h1>
+        <% } %>
+        <article class="shop-category-picture">
+          <div class="top-promotion-top">
+            <% if (locals.category) { %>
+            <img
+              src="/images/panoramic/<%= category.image %>"
+              alt="<%= category.name %> picture"
+            />
+            <% } else if (locals.brand) { %>
+              <img
+              src="/images/panoramic/brands.jpg"
+              alt="brands image"
+            />
+            <% } else { %>
+              <img
+              src="/images/panoramic/Snowboard.jpg"
+              alt="man jumping on snowboard"
+            />
+            <% } %>
+          </div>
+        </article>
+
+        <article class="shop-filter">
+          <div class="shop-filter-select">
+            <select name="shop-filter" id="filter">
+              <option value="" selected disabled >Filtrar por:</option>
+              <option value="name">Nombre del producto</option>
+              <option value="price">Precio</option>
+              <option value="size">Talle</option>
+            </select>
+          </div>
+        </article>
+      </section>
+
+      <section class="shop-view">
+        <!-- por cada uno de los productos enviados desde el controlador, dame su... -->
+        <% for(i=0; i<products.length; i++) { %>
+          <article class="shop-view-img shop-article-box-shadow">
+            <a href="/products/detail/<%= products[i].id %>">
+              <div class="shop-product-container">
+                <div class="shop-img-container">
+                  <img src="/images/products/<%= products[i].images[0].name %>" alt="foto producto"/>
+                </div>
+                <div class="shop-product-info">
+                  <div class="shop-article-title">
+                    <p><%= products[i].name %></p>
+                  </div>
+                  <div class="shop-article-price">
+                    <p><% if (products[i].sale == 1) { %>
+                      <span><%=products[i].discount%>%Off</span>
+                    <% } %>
+                    $<%= products[i].price %>
+                      
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </article>
+        <% } %> 
+      </section>
+
+      <% if(locals.totalPages && totalPages > 1) { %>
+        <section class="shop-pagination">
+          <% for (let i=0; i < totalPages; i++){ %>
+            <% if(locals.category) { %>
+              <form action="/products/<%=category.name.toLowerCase()%>" method="GET">
+            <% } else if (locals.onsale) { %>
+              <form action="/products/onsale" method="GET">
+            <% } else if (locals.brand) { %>
+              <form action="/products/brands/<%= brand.name %>" method="GET">
+            <% } else { %>
+              <form action="/products" method="GET">
+            <% } %>
+              <input type="hidden" name="page" value="<%=i%>"/>
+              <input type="hidden" name="size" value="<%=size%>"/>
+              <button type="submit"><%=i+1%></button>
+            </form>
+          <% } %>
+        </section>
+      <% } %>
+
+      <!-- <section class="shop-more">
+        <a href="#" class="shop-more-button">Mostrar más productos</a>
+      </section> -->
+    </main>
+          <footer class="section footer-classic context-dark bg-image" style="background:#f8f8f8;">
+            <%- include ('../partials/footer') %>
+           
+          </footer>
+    </body>

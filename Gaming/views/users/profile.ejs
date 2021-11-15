@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <%-  include ('../partials/head') %>
+      <%-  include ('../partials/headscripts') %>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+        <link rel="stylesheet" href="../css/styles.css">
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script> 
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> 
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script> 
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> 
+        
+ 
+    </head>
+    <body>
+         <header>  <%-  include ('../partials/header') %></header>
+          
+    <main class="main-profile">
+      <div class="profile-container">
+        <section class="profile-main-data">
+          <h1>Hola, <%= user.firstName %> <%= user.lastName %></h1>
+          <figure class="profile-img">
+            <img src="/images/users/<%= user.image.name %>" alt="foto perfil"/>
+          </figure>
+          <div class="profile-email"><%= user.email %></div>
+        </section>
+
+        <section class="profile-additional-data">
+            <ul class="profile-ul">
+              <li class="profile-li">
+                <a href="#">Wishlist</a>
+              </li>
+              <li class="profile-li">
+                <a href="/users/profile/orders/<%= user.id %>">Mis compras</a>
+              </li>
+              <li class="profile-li">
+                <a href="/users/profile/edit">Editar perfil</a>
+              </li>
+              
+              <form action="/users/delete" method="POST">
+                <button type="submit">Borrar cuenta</button>
+              </form>
+            </ul>
+        </section>
+      </div>
+    </main>
+
+          <footer class="section footer-classic context-dark bg-image" style="background:#f8f8f8;">
+            <footer class="section footer-classic context-dark bg-image" style="background:#f8f8f8;">
+              <%- include ('../partials/footer') %>
+             
+            </footer>
+    </body>

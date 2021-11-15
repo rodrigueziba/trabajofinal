@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <%-  include ('../partials/head') %>
+      <%-  include ('../partials/headscripts') %>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+        <link rel="stylesheet" href="../css/styles.css">
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script> 
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> 
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script> 
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> 
+        
+ 
+    </head>
+    <body>
+         <header>  <%-  include ('../partials/header') %></header>
+          
+    <main>
+        <div class="top-section">
+          <section class="top-promotion">
+            <article class="top-promotion-img">
+              <img src="/images/panoramic/login4.jpg" alt="Foto para login" />
+            </article>
+          </section>
+        </div>
+        <div class="content content-register">
+          <h1 class="logo">Crear Cuenta</h1>
+          <div class="contact-wrapper">
+            <div class="contact-form">
+              
+              <form id="register-form" action="/users/register" method="POST" enctype="multipart/form-data">
+                <p class="input-field">
+                  <label for="firstName">Nombre*</label>
+                  <input
+                    type="text"
+                    name="firstName"
+                    id="firstName"
+                    minlength="2"
+                    maxlength="20"
+                    required
+                    pattern="([^\s][A-zÀ-ž\s]+)"
+                    placeholder="Introduzca su nombre"
+                    class="<%= locals.errors && errors.firstName ? 'is-invalid' : null %>"
+                    value="<%= locals.oldData && oldData.firstName ? oldData.firstName : null%>"
+                  />
+                  <span class="infovalidacion firstName-validation"></span>
+                  
+                  <% if (locals.errors && errors.firstName) { %> 
+                    <label class="infovalidacion">
+                      <%= errors.firstName.msg %>
+                    </label>
+                  <% } %>
+                </p>
+  
+                <p>
+                  <label for="lastName">Apellido*</label>
+                  <input
+                    type="text"
+                    name="lastName"
+                    id="lastName"
+                    minlength="2"
+                    maxlength="20"
+                    required
+                    pattern="([^\s][A-zÀ-ž\s]+)"
+                    placeholder="Introduzca su apellido"
+                    class="<%= locals.errors && errors.lastName ? 'is-invalid' : null %>"
+                    value="<%= locals.oldData && oldData.lastName ? oldData.lastName : null%>"
+                  />
+                  <span class="infovalidacion lastName-validation"></span>
+                  <% if (locals.errors && errors.lastName) { %> 
+                    <label class="infovalidacion">
+                      <%= errors.lastName.msg %>
+                    </label>
+                  <% } %>
+                </p>
+  
+                <p>
+                  <label for="email-register">E-mail*</label>
+                  <input
+                    type="email"
+                    name="email"
+                    id="email-register"
+                    placeholder="email@havenboards.com.ar"
+                    required
+                    title="El campo debe tener un dato del tipo E-mail, conteniendo el símbolo @"
+                    class="<%= locals.errors && errors.email ? 'is-invalid' : null %>"
+                    value="<%= locals.oldData && oldData.email ? oldData.email : null %>"
+                    />
+                    <span class="infovalidacion email-validation"></span>
+  
+                  <% if (locals.errors && errors.email) { %> 
+                    <label class="infovalidacion">
+                      <%= errors.email.msg %>
+                    </label>
+                  <% } %>
+                  
+                </p>
+  
+                <p class="password-input">
+                  <label for="password">Contraseña*</label>
+                  <input type="password" name="password"
+                  id="password"
+                  required
+                  class="<%= locals.errors && errors.password ? 'is-invalid' : null %>"/>
+                  <span class="showBtn"><img class="show-icon" src="/images/icons/hide.png" alt="hide icon" /></span>
+                  <span class="infovalidacion password-validation"></span>
+  
+                  <% if (locals.errors && errors.password) { %> 
+                    <label class="infovalidacion">
+                      <%= errors.password.msg %>
+                    </label>
+                  <% } %>
+                </p>
+  
+                <p class="password2-input">
+                  <label for="password2">Repetir contraseña*</label>
+                  <input type="password" name="password2"
+                  id="password2"
+                  required
+                  class="<%= locals.errors && errors.password2 ? 'is-invalid' : null %>"/>
+                  <span class="showBtn2"><img class="show-icon" src="/images/icons/hide.png" alt="hide icon" /></span>
+                  <span class="infovalidacion password2-validation"></span>
+  
+                  <% if (locals.errors && errors.password2) { %> 
+                    <label class="infovalidacion">
+                      <%= errors.password2.msg %>
+                    </label>
+                  <% } %>
+                </p>
+  
+                <!-- <p>
+                  <label>Repetir Contraseña*</label>
+                  <input type="password" name="rePassword" required />
+                  <label class="infovalidacion"
+                    >Las Contraseñas deben coincidir</label>
+                </p> -->
+  
+  
+                <p>
+                  <label for="image">Ingrese imagen de perfil (opcional)</label>
+                  <input type="file"
+                    name="avatar"
+                    id="image"
+                    class="<%= locals.errors && errors.avatar ? 'is-invalid' : null %>"/>
+                    <span class="infovalidacion image-validation"></span>
+                    <% if (locals.errors && errors.avatar) { %> 
+                      <label class="infovalidacion">
+                        <%= errors.avatar.msg %>
+                      </label>
+                    <% } %>
+                </p>
+  
+                <p class="block">
+                  <button type="submit">Crear Cuenta</button>
+                </p>
+  
+              </form>
+            </div>
+          </div>
+        </div>
+      </main>
+
+          <footer class="section footer-classic context-dark bg-image" style="background:#f8f8f8;">
+            <footer class="section footer-classic context-dark bg-image" style="background:#f8f8f8;">
+              <%- include ('../partials/footer') %>
+             
+            </footer>
+    </body>

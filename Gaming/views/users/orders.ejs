@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <%-  include ('../partials/head') %>
+      <%-  include ('../partials/headscripts') %>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+        <link rel="stylesheet" href="../css/styles.css">
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script> 
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+ 
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> 
+       <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script> 
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> 
+        
+ 
+    </head>
+    <body>
+      <header> <%-  include ('../partials/header') %> </header>
+        
+    <main class="main-orders">
+        <section class="orders-list">
+          <!-- si hay orders -->
+          <% if (orders.length>0) { %>
+            <div class="orders-top-row">
+              <ul>
+                <li class="order-number">Orden</li>
+                <li class="order-product-title product-column">Producto</li>
+                <li class="order-amount">Cantidad</li>
+                <li class="order-price">Precio</li>
+                <li class="order-total-price">Precio Total</li>
+              </ul>
+            </div>
+            <div class="orders-table">
+              <ul>
+                <!-- por cada order -->
+                <% for(let i=0; i<orders.length; i++) { %>
+                  <div class="order-row">
+  
+                    <li class="order-number">
+                      <%= i+1 %>
+                    </li>
+                    
+                    <div class="order-container">
+                      <!-- por cada orderDetail -->
+                      <% for (let detail of orderDetail) { %>
+                        <!-- que coincida con el id de order -->
+                        <% if(orders[i].id == detail.order_id) { %>
+                          <div class="order-product product-column">
+          
+                            <li>
+                              <%= detail.product.name %>
+                            </li>
+                            <li class="order-amount">
+                              <%= detail.amount %>
+                            </li>
+                            <li class="order-price">
+                              <%= detail.price %>
+                            </li>
+                          </div>
+                        <% } %>
+                      <% } %>
+                    </div>
+                    <li class="order-total-price">
+                      <%= orders[i].totalPrice %>
+                    </li>
+                  </div>
+                <% } %>
+              </ul>
+            </div>
+          <% } else { %>
+            <p>No tienes órdenes a tu nombre.</p>
+          <% } %>
+        </section>
+      </main>
+
+
+
+      <footer class="section footer-classic context-dark bg-image" style="background:#f8f8f8;">
+        <%- include ('../partials/footer') %>
+       
+      </footer>
+</body>

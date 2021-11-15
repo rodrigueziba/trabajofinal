@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <%-  include ('../partials/head') %>
+      <%-  include ('../partials/headscripts') %>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+        <link rel="stylesheet" href="../css/styles.css">
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script> 
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+ 
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> 
+       <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script> 
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> 
+        
+ 
+    </head>
+    <body>
+      <header> <%-  include ('../partials/header') %> </header>
+      
+    <main>
+        <section class="delete-user-container">
+          <form method="POST" action="/users/destroy?_method=DELETE" >
+            <p class="delete-user-text"><%=user.firstName%>, ¿estás seguro de que quieres eliminar tu cuenta?</p>
+            <button type="submit">Eliminar cuenta</button>
+          </form>
+        </section>
+      </main>
+
+
+
+
+            <footer class="section footer-classic context-dark bg-image" style="background:#f8f8f8;">
+                <%- include ('../partials/footer') %>
+               
+              </footer>
+      </body>
