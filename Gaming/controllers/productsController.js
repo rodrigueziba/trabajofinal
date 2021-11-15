@@ -21,12 +21,25 @@ const { pathToFileURL } = require("url");
 const productsController = {
   // MUESTRA PRODUCTOS
   all:(req, res ) => {
-      res.render('/products/');
+    db.Product.findAll ({
+        include: [
+          { association: "category" },
+          //{ association: "tags" },
+         // { association: "images" },
+        ],
+      })
+    .then (function(productos){
+       
+        res.render('products/all', {productos:productos})
+    })
+      ;
   },
 
   search:(req, res ) => {},
 
-  create:(req, res ) => {},
+  create:(req, res ) => {
+      
+  },
 
   store:(req, res ) => {},
 

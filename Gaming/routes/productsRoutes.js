@@ -19,7 +19,7 @@ router.get("/", productsController.all);
 router.get("/search", productsController.search);
 
 /*** CREATE ONE PRODUCT ***/
-router.get("/create", productsController.create); //manda vista del form a través del método create del controlador
+router.get("/create", productsController.create); 
 router.post(
   "/create",
   //upload.array("image", 6),
